@@ -109,9 +109,6 @@ public class Swipe : MonoBehaviour
 				distanceSling = Vector2.Distance(_startPos, slingVec);
 
 				distanceSling = Mathf.Clamp(distanceSling, 0, 0.3f);
-				Debug.Log("distanceSling : " + distanceSling);
-                //if (distanceSling != 0.3f)
-                //{
 
                     slingVec = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
@@ -147,11 +144,6 @@ public class Swipe : MonoBehaviour
 					leftRopeRot = Quaternion.Euler(leftRopeRot.eulerAngles.x, leftRopeRot.eulerAngles.y + (distanceSling * 1.28f), leftRopeRot.eulerAngles.z);
 					slingRopeLeft.transform.rotation = leftRopeRot;
 				}
-					
-
-                    //slingRopeRight.transform.LookAt(rightRopeRotTarget);
-                //}
-
 
             }
 
@@ -248,6 +240,11 @@ public class Swipe : MonoBehaviour
 			});
 		});
 
-
+		Invoke("SlingControl", 1);
 	}
+
+	private void SlingControl()
+    {
+		transform.gameObject.SetActive(false);
+    }
 }

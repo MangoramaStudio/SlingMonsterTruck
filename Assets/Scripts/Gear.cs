@@ -18,6 +18,10 @@ public class Gear : MonoBehaviour
 
     public GearType gearType;
 
+    public GameObject fireEngineButton;
+
+    public Material readyMaterial;
+
     void Start()
     {
         gearType = GearType.N;
@@ -95,6 +99,7 @@ public class Gear : MonoBehaviour
             {
                 gear.transform.DORotate(new Vector3(20, 0, 0), gearTime, RotateMode.LocalAxisAdd);
                 gearType = GearType.D;
+                fireEngineButton.GetComponent<MeshRenderer>().material = readyMaterial;
             }
 
 
