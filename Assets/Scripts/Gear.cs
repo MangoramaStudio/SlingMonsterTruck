@@ -20,11 +20,14 @@ public class Gear : MonoBehaviour
 
     public GameObject fireEngineButton;
 
-    public Material readyMaterial;
+    public Material readyMaterial, firstMaterial;
 
     void Start()
     {
         gearType = GearType.N;
+        firstMaterial = fireEngineButton.transform.GetComponent<MeshRenderer>().material;
+
+        //gear.transform.GetComponent<Material>().SetVector("_EmissionColor", new Vector4(0.8196f, 0.783f, 0) * -4.0f);
     }
 
     // Update is called once per frame
@@ -67,10 +70,14 @@ public class Gear : MonoBehaviour
         else if (angle <= -45 && angle > -135)//Down Swipe
         {
             Debug.Log("DownSwipe!");
+
+            Destroy(gear.GetComponent<Animator>());
+
             if (gearType == GearType.D)
             {
                 gear.transform.DORotate(new Vector3(-20, 0, 0), gearTime, RotateMode.LocalAxisAdd);
                 gearType = GearType.N;
+                fireEngineButton.GetComponent<MeshRenderer>().material = firstMaterial;
             }
             else if (gearType == GearType.N)
             {
@@ -89,7 +96,8 @@ public class Gear : MonoBehaviour
         {
             Debug.Log("upSwipe!");
             //gear.transform.DORotate(new Vector3(20, 0, 0), gearTime, RotateMode.LocalAxisAdd);
-
+            Destroy(gear.GetComponent<Animator>());
+            
             if (gearType == GearType.R)
             {
                 gear.transform.DORotate(new Vector3(20, 0, 0), gearTime, RotateMode.LocalAxisAdd);

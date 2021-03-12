@@ -223,8 +223,8 @@ public class Swipe : MonoBehaviour
 
 	private void ThrowCar()
     {
-        ropeHolder.transform.DOMoveZ(ropeHolder.transform.position.z + 12, 0.5f);
-        slingRopeLeft.transform.DORotate(new Vector3(0, -130, 0), 0.5f, RotateMode.LocalAxisAdd).OnStart(() => 
+        ropeHolder.transform.DOMoveZ(ropeHolder.transform.position.z + 13, 0.5f);
+        slingRopeLeft.transform.DORotate(new Vector3(0, -140, 0), 0.5f, RotateMode.LocalAxisAdd).OnStart(() => 
 		{
 			slingRopeLeft.transform.DOScaleZ(0.5f, 0.25f).OnComplete(() =>
 			 {
@@ -232,7 +232,7 @@ public class Swipe : MonoBehaviour
 			 });
 		});
 
-        slingRopeRight.transform.DORotate(new Vector3(0, 130), 0.5f, RotateMode.LocalAxisAdd).OnStart(() =>
+        slingRopeRight.transform.DORotate(new Vector3(0, 140), 0.5f, RotateMode.LocalAxisAdd).OnStart(() =>
 		{
 			slingRopeRight.transform.DOScaleZ(0.5f, 0.25f).OnComplete(() =>
 			{

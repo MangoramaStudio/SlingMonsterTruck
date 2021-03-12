@@ -23,6 +23,7 @@ public class CameraTrigger : MonoBehaviour
             {
                 enterVCam.SetActive(true);
                 thirdPersonCam.SetActive(false);
+                Debug.Log("enterCamera Trigger");
             }
             else
             {

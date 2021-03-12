@@ -12,6 +12,7 @@ public class PathFollowObject : MonoBehaviour
     private GameObject car;
     private bool isTakeForce;
 
+    private Vector3 enterVelocity;
     void Start()
     {
         
@@ -32,7 +33,7 @@ public class PathFollowObject : MonoBehaviour
             {
                 Debug.Log("triggered");
                 other.transform.GetComponent<PathFollower>().enabled = true;
-                
+                FindObjectOfType<GameManager>().pathEnterForce = car.transform.GetComponent<Rigidbody>().velocity;
             }
             else
             {
@@ -58,9 +59,9 @@ public class PathFollowObject : MonoBehaviour
 
     private IEnumerator GiveForceIE()
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
         car.transform.GetComponent<Rigidbody>().isKinematic = false;
         yield return new WaitForEndOfFrame();
-        car.transform.GetComponent<Rigidbody>().AddForce(Vector3.forward * 200, ForceMode.Impulse);
+        car.transform.GetComponent<Rigidbody>().AddForce(FindObjectOfType<GameManager>().pathEnterForce * 1.5f , ForceMode.Impulse);
     }
 }

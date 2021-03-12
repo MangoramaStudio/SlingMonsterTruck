@@ -7,14 +7,29 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject road1, road2;
+
+    public Vector3 pathEnterForce;
+
     void Start()
     {
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RestartScene()
     {
-        
+        if (PlayerPrefs.GetInt("roadIndex") == 0)
+        {
+            road1.SetActive(true);
+            road2.SetActive(false);
+            PlayerPrefs.SetInt("roadIndex", 1);
+        }
+        else
+        {
+            road1.SetActive(false);
+            road2.SetActive(true);
+            PlayerPrefs.SetInt("roadIndex", 0);
+        }
     }
 }

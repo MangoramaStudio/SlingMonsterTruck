@@ -41,7 +41,8 @@ public class Car : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("joystick vertical : " + joystick.Horizontal);
+        //Debug.Log("Car velocity : " + transform.GetComponent<Rigidbody>().velocity);
+        //Debug.Log("joystick vertical : " + joystick.Horizontal);
         transform.position += new Vector3(joystick.Horizontal, 0) * Time.deltaTime * speed;
     }
 
