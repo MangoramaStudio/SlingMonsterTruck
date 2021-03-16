@@ -46,6 +46,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -203,17 +204,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7639827409276192414}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a212365745e8384bbd77af69d036a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 1920450985114119947, guid: 51a427cf377ff47c992470fb7f2f773f,
-    type: 3}
+  carPrefab: {fileID: 0}
   trajectory: {fileID: 6679317379123441117}
   pushForce: 20
   maxForce: 12
-  zMultiplier: 1
+  zMultiplier: 10
+  _car: {fileID: 0}
+  slingRopeRight: {fileID: 0}
+  slingRopeLeft: {fileID: 0}
+  ropeHolder: {fileID: 0}
+  greenArrow: {fileID: 21300000, guid: 8f65fad88d445134497e47df5bfe8579, type: 3}
+  yellowArrow: {fileID: 21300000, guid: 6ff47f425b930254e9c734b9d1f15cb3, type: 3}
 --- !u!1 &7837524168944051566
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +266,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

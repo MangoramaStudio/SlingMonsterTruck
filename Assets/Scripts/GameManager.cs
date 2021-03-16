@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,12 +25,14 @@ public class GameManager : MonoBehaviour
             road1.SetActive(true);
             road2.SetActive(false);
             PlayerPrefs.SetInt("roadIndex", 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
         {
             road1.SetActive(false);
             road2.SetActive(true);
             PlayerPrefs.SetInt("roadIndex", 0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

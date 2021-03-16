@@ -18,7 +18,14 @@ public class Car : MonoBehaviour
 
     public Joystick joystick;
 
-    private float speed = 10;
+    private float speed = 20;
+
+    private float rotationValue;
+
+    private Quaternion targetRot;
+
+    private float firstZRot;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -30,6 +37,8 @@ public class Car : MonoBehaviour
         }
 
         canvas = FindObjectOfType<Canvas>();
+
+        firstZRot = transform.rotation.eulerAngles.z;
     }
 
     public void Push(Vector3 force)
@@ -43,7 +52,22 @@ public class Car : MonoBehaviour
     {
         //Debug.Log("Car velocity : " + transform.GetComponent<Rigidbody>().velocity);
         //Debug.Log("joystick vertical : " + joystick.Horizontal);
-        transform.position += new Vector3(joystick.Horizontal, 0) * Time.deltaTime * speed;
+
+        if (joystick.gameObject.activeInHierarchy && joystick.Horizontal != 0)
+        {
+            rotationValue = firstZRot + (joystick.Horizontal * 20);
+
+            rotationValue = Mathf.Clamp(rotationValue, -30, 30);
+
+            //Debug.Log("rotation : " + rotationValue);
+
+            targetRot = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, - rotationValue);
+
+            transform.rotation = targetRot;
+
+            transform.position += new Vector3(joystick.Horizontal, 0) * Time.deltaTime * speed;
+        }
+       
     }
 
     private void OnCollisionEnter(Collision collision)

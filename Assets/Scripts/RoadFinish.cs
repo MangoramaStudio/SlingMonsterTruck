@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoadFinish : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class RoadFinish : MonoBehaviour
 
     public bool isTriggerforJoystick;
 
-    public GameObject winPanel, losePanel;
+    public GameObject levelEndPanel;
 
     public GameObject[] particles;
+
+    public bool isWinCollider;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +26,7 @@ public class RoadFinish : MonoBehaviour
             {
                 particles[i].GetComponent<ParticleSystem>().Stop();
             }
+            other.GetComponent<BoxCollider>().isTrigger = false;
         }
     }
 
@@ -31,7 +35,16 @@ public class RoadFinish : MonoBehaviour
         if (collision.transform.GetComponent<Car>() != null)
         {
             //place for finish win
-            winPanel.SetActive(true);
+            if (isWinCollider)
+            {
+                levelEndPanel.transform.Find("StickForWinOrFail/Text").GetComponent<Text>().text = "Win";
+            }
+            else
+            {
+                levelEndPanel.transform.Find("StickForWinOrFail/Text").GetComponent<Text>().text = "Fail";
+            }
+            levelEndPanel.SetActive(true);
+
         }
     }
 }

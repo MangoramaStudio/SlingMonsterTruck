@@ -35,6 +35,8 @@ public class Swipe : MonoBehaviour
 	public GameObject ropeHolder;
 
 	float distanceSling;
+
+	public Sprite greenArrow, yellowArrow;
 	private void Awake()
     {
 		//gameManager = FindObjectOfType<GameManager>();
@@ -83,7 +85,7 @@ public class Swipe : MonoBehaviour
 		// Dragging
         if (Input.GetMouseButton(0)) {
 			// Taking secnd point on screen for force vector
-			Debug.Log("endPos : " + _endPos);
+			//Debug.Log("endPos : " + _endPos);
 
 			_endPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
@@ -102,9 +104,25 @@ public class Swipe : MonoBehaviour
 
 			_forcevector = new Vector3(_forcevector.x, transform.position.y, _forcevector.z);
 
-			//Debug.Log("distance : " + distance + "forcevector : " + _forcevector);
+            Debug.Log("distance : " + distance + "forcevector : " + _forcevector);
 
-			if (_endPos != slingVec )
+            if (_forcevector.x < 2 && _forcevector.x > -2)
+            {
+                for (int i = 0; i < transform.Find("Trajectory/Dots").childCount; i++)
+                {
+                    transform.Find("Trajectory/Dots").GetChild(i).GetComponent<SpriteRenderer>().sprite = greenArrow;
+                }
+
+            }
+            else
+            {
+				for (int i = 0; i < transform.Find("Trajectory/Dots").childCount; i++)
+                {
+                    transform.Find("Trajectory/Dots").GetChild(i).GetComponent<SpriteRenderer>().sprite = yellowArrow;
+                }
+            }
+
+            if (_endPos != slingVec )
 			{
 				distanceSling = Vector2.Distance(_startPos, slingVec);
 

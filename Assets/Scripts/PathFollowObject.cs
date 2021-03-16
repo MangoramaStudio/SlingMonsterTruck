@@ -28,10 +28,10 @@ public class PathFollowObject : MonoBehaviour
         if (other.transform.GetComponent<Car>() != null)
         {
             car = other.transform.gameObject;
-            Debug.Log(car.gameObject.name);
+            //Debug.Log(car.gameObject.name);
             if (isEnterPath)
             {
-                Debug.Log("triggered");
+                //Debug.Log("triggered");
                 other.transform.GetComponent<PathFollower>().enabled = true;
                 FindObjectOfType<GameManager>().pathEnterForce = car.transform.GetComponent<Rigidbody>().velocity;
             }
@@ -42,7 +42,8 @@ public class PathFollowObject : MonoBehaviour
                     isTakeForce = true;
                     other.transform.GetComponent<PathFollower>().enabled = false;
                     other.transform.GetComponent<Rigidbody>().isKinematic = true;
-                    other.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    //other.transform.GetComponent<Rigidbody>().mass = 0.5f;
+                    //other.transform.rotation = Quaternion.Euler(0, 0, 0);
                     Invoke("GiveForce", 0.001f);
                 }
                     
@@ -62,6 +63,7 @@ public class PathFollowObject : MonoBehaviour
         //Debug.Log("enter");
         car.transform.GetComponent<Rigidbody>().isKinematic = false;
         yield return new WaitForEndOfFrame();
-        car.transform.GetComponent<Rigidbody>().AddForce(FindObjectOfType<GameManager>().pathEnterForce * 1.5f , ForceMode.Impulse);
+        //car.transform.GetComponent<Rigidbody>().AddForce(FindObjectOfType<GameManager>().pathEnterForce * 1.5f , ForceMode.Impulse);
+        car.transform.GetComponent<Rigidbody>().AddForce(new Vector3(0,1,1) * 100 , ForceMode.Impulse);
     }
 }

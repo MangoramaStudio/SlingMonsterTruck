@@ -23,7 +23,7 @@ public class FireButton : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("FireButton");
+        //Debug.Log("FireButton");
 
         if (gearObject.gearType == Gear.GearType.D)
         {
