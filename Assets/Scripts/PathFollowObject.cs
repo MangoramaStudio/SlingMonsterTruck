@@ -64,6 +64,6 @@ public class PathFollowObject : MonoBehaviour
         car.transform.GetComponent<Rigidbody>().isKinematic = false;
         yield return new WaitForEndOfFrame();
         //car.transform.GetComponent<Rigidbody>().AddForce(FindObjectOfType<GameManager>().pathEnterForce * 1.5f , ForceMode.Impulse);
-        car.transform.GetComponent<Rigidbody>().AddForce(new Vector3(0,1,1) * 100 , ForceMode.Impulse);
+        car.transform.GetComponent<Rigidbody>().AddForce(new Vector3(0,1,1) * 300 * FindObjectOfType<GameManager>().distanceMultiplier, ForceMode.Impulse);
     }
 }

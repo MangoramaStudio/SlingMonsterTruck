@@ -70,7 +70,6 @@ public class Swipe : MonoBehaviour
 		// Starting to drag
 		if (Input.GetMouseButtonDown(0)) {
 			// Starting to showing trajectory
-			trajectory.Show();
 		
 			// Taking first point on screen for force vector
 			_startPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
@@ -104,66 +103,72 @@ public class Swipe : MonoBehaviour
 
 			_forcevector = new Vector3(_forcevector.x, transform.position.y, _forcevector.z);
 
-            Debug.Log("distance : " + distance + "forcevector : " + _forcevector);
-
-            if (_forcevector.x < 2 && _forcevector.x > -2)
+            //Debug.Log("distance : " + distance + "forcevector : " + _forcevector);
+            if (_forcevector.z > 0)
             {
-                for (int i = 0; i < transform.Find("Trajectory/Dots").childCount; i++)
-                {
-                    transform.Find("Trajectory/Dots").GetChild(i).GetComponent<SpriteRenderer>().sprite = greenArrow;
-                }
+				trajectory.Show();
 
-            }
-            else
-            {
-				for (int i = 0; i < transform.Find("Trajectory/Dots").childCount; i++)
-                {
-                    transform.Find("Trajectory/Dots").GetChild(i).GetComponent<SpriteRenderer>().sprite = yellowArrow;
-                }
-            }
+				if (_forcevector.x < 2 && _forcevector.x > -2)
+				{
+					for (int i = 0; i < transform.Find("Trajectory/Dots").childCount; i++)
+					{
+						transform.Find("Trajectory/Dots").GetChild(i).GetComponent<SpriteRenderer>().sprite = greenArrow;
+					}
 
-            if (_endPos != slingVec )
-			{
-				distanceSling = Vector2.Distance(_startPos, slingVec);
+				}
+				else
+				{
+					for (int i = 0; i < transform.Find("Trajectory/Dots").childCount; i++)
+					{
+						transform.Find("Trajectory/Dots").GetChild(i).GetComponent<SpriteRenderer>().sprite = yellowArrow;
+					}
+				}
 
-				distanceSling = Mathf.Clamp(distanceSling, 0, 0.3f);
+				if (_endPos != slingVec)
+				{
+					distanceSling = Vector2.Distance(_startPos, slingVec);
 
-                    slingVec = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+					distanceSling = Mathf.Clamp(distanceSling, 0, 0.3f);
 
-				//car position change
+					slingVec = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+					//car position change
 					carBackBoundValue = _car.transform.position.z - (distanceSling / 5);
-					ropeHolderBoundValue = ropeHolder.transform.position.z -(distanceSling / 5);
+					ropeHolderBoundValue = ropeHolder.transform.position.z - (distanceSling / 5);
 
 					carBackBoundValue = Mathf.Clamp(carBackBoundValue, _carZvalue - 4, _carZvalue);
-				ropeHolderBoundValue = Mathf.Clamp(ropeHolderBoundValue, ropeHolderZValue - 4, ropeHolderZValue);
+					ropeHolderBoundValue = Mathf.Clamp(ropeHolderBoundValue, ropeHolderZValue - 4, ropeHolderZValue);
 
 					_car.transform.position = new Vector3(_car.transform.position.x, _car.transform.position.y, carBackBoundValue);
 
-				ropeHolder.transform.position = new Vector3(ropeHolder.transform.position.x, ropeHolder.transform.position.y, ropeHolderBoundValue);
+					ropeHolder.transform.position = new Vector3(ropeHolder.transform.position.x, ropeHolder.transform.position.y, ropeHolderBoundValue);
 
 
-                //rope Scale change
-                if (carBackBoundValue != _carZvalue-4)
-                {
-					slingRopeRight.transform.localScale =
-						new Vector3(slingRopeRight.transform.localScale.x,//- (distanceSling / 25)
-						slingRopeRight.transform.localScale.y,//+ (distanceSling / 3)
-						slingRopeRight.transform.localScale.z + (distanceSling /18));
+					//rope Scale change
+					if (carBackBoundValue != _carZvalue - 4)
+					{
+						slingRopeRight.transform.localScale =
+							new Vector3(slingRopeRight.transform.localScale.x,//- (distanceSling / 25)
+							slingRopeRight.transform.localScale.y,//+ (distanceSling / 3)
+							slingRopeRight.transform.localScale.z + (distanceSling / 18));
 
-					//rope rotation change
-					rightRopeRot = Quaternion.Euler(rightRopeRot.eulerAngles.x, rightRopeRot.eulerAngles.y - (distanceSling * 1.28f), rightRopeRot.eulerAngles.z);
-					slingRopeRight.transform.rotation = rightRopeRot;
+						//rope rotation change
+						rightRopeRot = Quaternion.Euler(rightRopeRot.eulerAngles.x, rightRopeRot.eulerAngles.y - (distanceSling * 1.28f), rightRopeRot.eulerAngles.z);
+						slingRopeRight.transform.rotation = rightRopeRot;
 
-					slingRopeLeft.transform.localScale =
-						new Vector3(slingRopeLeft.transform.localScale.x,//- (distanceSling / 25)
-						slingRopeLeft.transform.localScale.y,//+ (distanceSling / 3)
-						slingRopeLeft.transform.localScale.z + (distanceSling / 18));
+						slingRopeLeft.transform.localScale =
+							new Vector3(slingRopeLeft.transform.localScale.x,//- (distanceSling / 25)
+							slingRopeLeft.transform.localScale.y,//+ (distanceSling / 3)
+							slingRopeLeft.transform.localScale.z + (distanceSling / 18));
 
-					leftRopeRot = Quaternion.Euler(leftRopeRot.eulerAngles.x, leftRopeRot.eulerAngles.y + (distanceSling * 1.28f), leftRopeRot.eulerAngles.z);
-					slingRopeLeft.transform.rotation = leftRopeRot;
+						leftRopeRot = Quaternion.Euler(leftRopeRot.eulerAngles.x, leftRopeRot.eulerAngles.y + (distanceSling * 1.28f), leftRopeRot.eulerAngles.z);
+						slingRopeLeft.transform.rotation = leftRopeRot;
+					}
+
 				}
+			}
 
-            }
+            
 
 			
 
@@ -214,11 +219,18 @@ public class Swipe : MonoBehaviour
             //}
 
             // Hiding the trajectory
-            _car.Push(_forcevector);
 
-            trajectory.Hide();
+            if (_forcevector.z > 0)
+            {
+				_car.Push(_forcevector);
 
-			ThrowCar();
+				trajectory.Hide();
+
+				ThrowCar();
+
+				FindObjectOfType<GameManager>().distanceMultiplier = distanceSling;
+			}
+            
 			//animator.SetInteger("idle", 1);
 			//animator.SetInteger("throw", 0);
 
@@ -226,9 +238,9 @@ public class Swipe : MonoBehaviour
 
 			//isThrow = true;
 
-            //transform.gameObject.SetActive(false);
-            //gameManager.currentSwipe = otherHand.GetComponent<Swipe>();
-        }
+			//transform.gameObject.SetActive(false);
+			//gameManager.currentSwipe = otherHand.GetComponent<Swipe>();
+		}
 	}
 
 	// Spawns a new ball

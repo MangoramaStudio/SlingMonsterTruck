@@ -11,28 +11,36 @@ public class GameManager : MonoBehaviour
 
     public Vector3 pathEnterForce;
 
+    public float distanceMultiplier;
+
     void Start()
     {
         //Application.targetFrameRate = 60;
-
+        RestartSceneManage();
 
     }
 
-    public void RestartScene()
+    public void RestartSceneManage()
     {
         if (PlayerPrefs.GetInt("roadIndex") == 0)
         {
             road1.SetActive(true);
             road2.SetActive(false);
-            PlayerPrefs.SetInt("roadIndex", 1);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
         {
             road1.SetActive(false);
             road2.SetActive(true);
-            PlayerPrefs.SetInt("roadIndex", 0);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        FBManager.Instance.SendEventLevelStarted(PlayerPrefs.GetInt("levelIndex"));
     }
+
+    public void RestartCommand()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 }
